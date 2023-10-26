@@ -1,7 +1,7 @@
 const path = require('path')
-const prod = process.env.NODE_ENV === 'production';
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const prod = process.env.NODE_ENV === 'production'
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   entry: './src/index.tsx',
@@ -9,7 +9,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main_bundle.js',
-    publicPath: '/'
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -19,7 +19,7 @@ module.exports = {
         resolve: {
           extensions: ['.ts', '.tsx', '.js', '.json'],
         },
-        use: ["ts-loader"],
+        use: ['ts-loader'],
       },
       {
         test: /\.css$/,
@@ -29,7 +29,7 @@ module.exports = {
         test: /\.s[ac]ss$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
-    ]
+    ],
   },
   devtool: prod ? undefined : 'source-map',
   devServer: {
@@ -44,4 +44,4 @@ module.exports = {
     }),
     new MiniCssExtractPlugin(),
   ],
-};
+}

@@ -7,7 +7,8 @@
   "license": "ISC",
   "scripts": {
     "start": "webpack serve --config ./webpack.config.js --mode development --port 3000",
-    "build": "NODE_ENV=development webpack"
+    "build": "NODE_ENV=development webpack",
+    "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\""
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",

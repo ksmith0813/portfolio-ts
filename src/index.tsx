@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client'
+import { Main } from 'components/navigation/main'
 
-const container = document.getElementById('root')!
-const root = createRoot(container)
-root.render(<h1>Hello React!</h1>)
+const container = document.getElementById('root')
+const root = createRoot(container!)
+root.render(<Main />)

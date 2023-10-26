@@ -20,7 +20,7 @@ const StyledGreetingBox = styled(Box)({
 })
 
 const StyledLinkPaper = styled(Paper)(({ theme }) => ({
-  ...theme.typography.subtitle1,
+  ...theme.typography.h6,
   backgroundColor: '#ced4da',
   padding: theme.spacing(6),
   textAlign: 'center',

@@ -41,7 +41,9 @@ export const Home = () => {
     <>
       <StyledContainerBox>
         <StyledGreetingBox>
-          <Typography variant='h2'>Hello.</Typography>
+          <Typography variant='h2' sx={{ marginBottom: '1rem' }}>
+            Hello.
+          </Typography>
           <Typography variant='h6'>
             Welcome to my React portfolio application. My name is Kevin Smith. I am a Lead Software Engineer and Tech
             Lead. This application demostrates my frontend engineering skills using the ReactJS library. The tech stack

@@ -26,7 +26,7 @@ export const Navigation = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-            Home
+            Kevin Smith
           </Typography>
           <Button color='inherit'>Links</Button>
         </Toolbar>

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Navigation } from './navigation'
 import { Home } from 'components/home/home'
+import 'index.scss'
 
 export const Main = () => (
   <BrowserRouter>

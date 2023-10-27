@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { styled } from '@mui/material/styles'
-import { Box, Grid, Paper, Typography } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 import ViewQuiltIcon from '@mui/icons-material/ViewQuilt'
 import AppRegistrationOutlinedIcon from '@mui/icons-material/AppRegistrationOutlined'
 import TableViewIcon from '@mui/icons-material/TableView'
@@ -30,7 +30,8 @@ const StyledContainerBox = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   background: theme.hero,
   color: theme.palette.primary.contrastText,
-  marginBottom: '3rem',
+  margin: '-2rem',
+  marginBottom: '2rem',
   padding: '2rem',
   textAlign: 'center',
 }))
@@ -46,6 +47,7 @@ const StyledLinkBox = styled(Box)(({ theme }) => ({
   flexDirection: 'column',
   alignItems: 'center',
   backgroundColor: theme.gray3,
+  color: theme.gray7,
   padding: theme.spacing(4),
   fontSize: '2rem',
   textAlign: 'center',
@@ -57,7 +59,7 @@ const StyledLinkBox = styled(Box)(({ theme }) => ({
   },
   '& .MuiSvgIcon-root': {
     fontSize: '7rem',
-    marginTop: '1.5rem',
+    marginTop: '1rem',
   },
 }))
 

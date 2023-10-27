@@ -13,7 +13,7 @@ const StyledAppBar = styled(AppBar)(({}) => ({
   background: theme.header,
 }))
 
-export const Navigation = () => {
+export const App = () => {
   const [activePage, setActivePage] = useState('home')
   const location = useLocation()
   const navigate = useNavigate()
@@ -37,7 +37,7 @@ export const Navigation = () => {
             <Button color='inherit'>Links</Button>
           </Toolbar>
         </StyledAppBar>
-        <Box sx={{ m: '1rem' }}>
+        <Box sx={{ m: '2rem' }}>
           <Outlet />
         </Box>
       </Box>

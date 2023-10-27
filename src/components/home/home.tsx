@@ -13,6 +13,7 @@ type PageLink = {
   route: string
   icon: ReactElement
 }
+
 const pageLinks: PageLink[] = [
   { route: 'dashboard', icon: <ViewQuiltIcon /> },
   { route: 'register', icon: <AppRegistrationOutlinedIcon /> },

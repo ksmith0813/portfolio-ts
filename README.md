@@ -8,7 +8,7 @@ You will need `node` and `npm` installed globally on your machine.
 
 Clone:
 
-`https://github.com/ksmith0813/portfolio.git`
+`https://github.com/ksmith0813/portfolio-ts.git`
 
 Installation:
 

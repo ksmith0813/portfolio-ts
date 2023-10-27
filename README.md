@@ -1,7 +1,5 @@
 # Portfolio Typescript App - WIP
 
-![image](https://github.com/ksmith0813/portfolio-ts/blob/main/public/screenshot.png)
-
 ## Installation and Setup Instructions
 
 #### Initial Setup:

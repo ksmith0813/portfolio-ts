@@ -1,8 +1,26 @@
+import { ReactElement } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { styled } from '@mui/material/styles'
 import { Box, Grid, Paper, Typography } from '@mui/material'
+import ViewQuiltIcon from '@mui/icons-material/ViewQuilt'
+import AppRegistrationOutlinedIcon from '@mui/icons-material/AppRegistrationOutlined'
+import TableViewIcon from '@mui/icons-material/TableView'
+import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined'
+import WbSunnyIcon from '@mui/icons-material/WbSunny'
+import BarChartIcon from '@mui/icons-material/BarChart'
 
-const pageLinks = ['dashboard', 'register', 'table', 'list', 'weather', 'visuals']
+type PageLink = {
+  route: string
+  icon: ReactElement
+}
+const pageLinks: PageLink[] = [
+  { route: 'dashboard', icon: <ViewQuiltIcon /> },
+  { route: 'register', icon: <AppRegistrationOutlinedIcon /> },
+  { route: 'table', icon: <TableViewIcon /> },
+  { route: 'list', icon: <FormatListBulletedOutlinedIcon /> },
+  { route: 'weather', icon: <WbSunnyIcon /> },
+  { route: 'visuals', icon: <BarChartIcon /> },
+]
 
 const StyledContainerBox = styled(Box)({
   display: 'flex',
@@ -23,12 +41,17 @@ const StyledLinkPaper = styled(Paper)(({ theme }) => ({
   ...theme.typography.h6,
   backgroundColor: '#ced4da',
   padding: theme.spacing(6),
+  fontSize: '2rem',
   textAlign: 'center',
   textTransform: 'uppercase',
   ':hover': {
     cursor: 'pointer',
     color: '#1976d2',
     opacity: 0.8,
+  },
+  '& .MuiSvgIcon-root': {
+    fontSize: '7rem',
+    marginTop: '1rem',
   },
 }))
 
@@ -53,11 +76,12 @@ export const Home = () => {
           </Typography>
         </StyledGreetingBox>
       </StyledContainerBox>
-      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-        {pageLinks.map((pageLink, index) => (
+      <Grid container spacing={4} columns={{ xs: 4, sm: 8, md: 12 }}>
+        {pageLinks.map((pageLink: PageLink, index) => (
           <Grid item xs={2} sm={4} md={4} key={index}>
-            <StyledLinkPaper elevation={0} onClick={() => onItemClick(pageLink)}>
-              {pageLink}
+            <StyledLinkPaper elevation={0} onClick={() => onItemClick(pageLink.route)}>
+              <Typography variant='h6'>{pageLink.route}</Typography>
+              {pageLink.icon}
             </StyledLinkPaper>
           </Grid>
         ))}

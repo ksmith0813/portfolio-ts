@@ -33,7 +33,7 @@ declare module '@mui/material/styles' {
 
 export const theme = createTheme({
   header: '#000000',
-  hero: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(25,118,210,1) 100%)',
+  hero: 'radial-gradient(circle, rgba(25,118,210,1) 0%, rgba(9,9,121,1) 0%, rgba(25,118,210,1) 100%)',
   gray9: '#22262a',
   gray8: '#2e3235',
   gray7: '#495057',

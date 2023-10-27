@@ -1,13 +1,39 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { AppBar, Box, styled, ThemeProvider, Toolbar, Tooltip, Typography } from '@mui/material'
+import {
+  AppBar,
+  Box,
+  CssBaseline,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  styled,
+  ThemeProvider,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from '@mui/material'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import GitHubIcon from '@mui/icons-material/GitHub'
+import { PageLink, pageLinks } from 'components/_siteWide/pageLink'
 import { theme } from 'theme/theme'
 
-const StyledAppBar = styled(AppBar)(({}) => ({
+const StyledAppBar = styled(AppBar)({
   background: theme.header,
-}))
+})
+
+const StyledListItemText = styled(ListItemText)({
+  textTransform: 'capitalize',
+})
+
+const StyledBoxOutlet = styled(Box)({
+  paddingTop: '2rem',
+  paddingLeft: '184px',
+  width: 'calc(100% - 32px)',
+})
 
 const ExternalLinks = () => (
   <Box>
@@ -24,30 +50,63 @@ const ExternalLinks = () => (
 )
 
 export const App = () => {
-  const [activePage, setActivePage] = useState('home')
-  const location = useLocation()
   const navigate = useNavigate()
+  const { pathname } = useLocation()
 
   useEffect(() => {
-    if (location.pathname === '/') navigate('../home')
-    setActivePage(location.pathname.substring(1))
-  }, [location.pathname, navigate])
+    if (pathname === '/') navigate('../home')
+  }, [pathname, navigate])
+
+  const onItemClick = (page: string) => navigate(`../${page}`)
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ flexGrow: 1 }}>
-        <StyledAppBar position='sticky'>
-          <Toolbar>
-            <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-              Kevin Smith
-            </Typography>
-            <ExternalLinks />
-          </Toolbar>
-        </StyledAppBar>
-        <Box sx={{ m: '2rem' }}>
-          <Outlet />
+      <CssBaseline />
+      <StyledAppBar position='sticky' sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+        <Toolbar>
+          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+            Kevin Smith
+          </Typography>
+          <ExternalLinks />
+        </Toolbar>
+      </StyledAppBar>
+      <Drawer
+        variant='permanent'
+        sx={{
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            boxSizing: 'border-box',
+          },
+        }}
+      >
+        <Toolbar />
+        <Box sx={{ overflow: 'auto' }}>
+          <List>
+            {pageLinks.map((pageLink: PageLink) => {
+              const route = pageLink.route
+              return (
+                <ListItem key={route} disablePadding sx={{ display: 'block' }} onClick={() => onItemClick(route)}>
+                  <ListItemButton selected={route === pathname}>
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: 2,
+                        justifyContent: 'center',
+                      }}
+                    >
+                      {pageLink.icon}
+                    </ListItemIcon>
+                    <StyledListItemText primary={route.substring(1)} />
+                  </ListItemButton>
+                </ListItem>
+              )
+            })}
+          </List>
         </Box>
-      </Box>
+      </Drawer>
+      <StyledBoxOutlet>
+        <Outlet />
+      </StyledBoxOutlet>
     </ThemeProvider>
   )
 }

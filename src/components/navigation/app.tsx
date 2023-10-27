@@ -1,17 +1,27 @@
 import { useState, useEffect } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { AppBar, styled, ThemeProvider } from '@mui/material'
-import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import MenuIcon from '@mui/icons-material/Menu'
+import { AppBar, Box, styled, ThemeProvider, Toolbar, Tooltip, Typography } from '@mui/material'
+import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import GitHubIcon from '@mui/icons-material/GitHub'
 import { theme } from 'theme/theme'
 
 const StyledAppBar = styled(AppBar)(({}) => ({
   background: theme.header,
 }))
+
+const ExternalLinks = () => (
+  <Box>
+    <Tooltip title='LinkedIn' enterDelay={0.5}>
+      <LinkedInIcon
+        sx={{ mr: '.5rem' }}
+        onClick={() => window.open('https://www.linkedin.com/in/kevin-smith-26339411a/', '_blank')}
+      />
+    </Tooltip>
+    <Tooltip title='Github' enterDelay={0.5}>
+      <GitHubIcon onClick={() => window.open('https://github.com/ksmith0813', '_blank')} />
+    </Tooltip>
+  </Box>
+)
 
 export const App = () => {
   const [activePage, setActivePage] = useState('home')
@@ -28,13 +38,10 @@ export const App = () => {
       <Box sx={{ flexGrow: 1 }}>
         <StyledAppBar position='sticky'>
           <Toolbar>
-            <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ mr: 2 }}>
-              <MenuIcon />
-            </IconButton>
             <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
               Kevin Smith
             </Typography>
-            <Button color='inherit'>Links</Button>
+            <ExternalLinks />
           </Toolbar>
         </StyledAppBar>
         <Box sx={{ m: '2rem' }}>

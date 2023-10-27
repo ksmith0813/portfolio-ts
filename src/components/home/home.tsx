@@ -22,16 +22,17 @@ const pageLinks: PageLink[] = [
   { route: 'visuals', icon: <BarChartIcon /> },
 ]
 
-const StyledContainerBox = styled(Box)({
+const StyledContainerBox = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   flexDirection: 'column',
   alignItems: 'center',
-  backgroundColor: '#dee2e6',
+  background: theme.hero,
+  color: theme.palette.primary.contrastText,
   marginBottom: '3rem',
   textAlign: 'center',
   padding: '2rem',
-})
+}))
 
 const StyledGreetingBox = styled(Box)({
   maxWidth: '50%',
@@ -39,15 +40,15 @@ const StyledGreetingBox = styled(Box)({
 
 const StyledLinkPaper = styled(Paper)(({ theme }) => ({
   ...theme.typography.h6,
-  backgroundColor: '#ced4da',
+  backgroundColor: theme.gray3,
   padding: theme.spacing(6),
   fontSize: '2rem',
   textAlign: 'center',
   textTransform: 'uppercase',
   ':hover': {
     cursor: 'pointer',
-    color: '#1976d2',
-    opacity: 0.8,
+    color: theme.palette.primary.light,
+    backgroundColor: theme.gray3,
   },
   '& .MuiSvgIcon-root': {
     fontSize: '7rem',
@@ -67,7 +68,7 @@ export const Home = () => {
           <Typography variant='h2' sx={{ marginBottom: '1rem' }}>
             Hello.
           </Typography>
-          <Typography variant='h6'>
+          <Typography variant='h5'>
             Welcome to my React portfolio application. My name is Kevin Smith. I am a Lead Software Engineer and Tech
             Lead. This application demostrates my frontend engineering skills using the ReactJS library. The tech stack
             is Typescript, Redux Toolkit, Redux Forms, Functional Components, Webpack, Material UI, Custom Theming, and

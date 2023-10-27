@@ -30,29 +30,33 @@ const StyledContainerBox = styled(Box)(({ theme }) => ({
   background: theme.hero,
   color: theme.palette.primary.contrastText,
   marginBottom: '3rem',
-  textAlign: 'center',
   padding: '2rem',
+  textAlign: 'center',
 }))
 
 const StyledGreetingBox = styled(Box)({
   maxWidth: '50%',
 })
 
-const StyledLinkPaper = styled(Paper)(({ theme }) => ({
+const StyledLinkBox = styled(Box)(({ theme }) => ({
   ...theme.typography.h6,
+  display: 'flex',
+  justifyContent: 'center',
+  flexDirection: 'column',
+  alignItems: 'center',
   backgroundColor: theme.gray3,
-  padding: theme.spacing(6),
+  padding: theme.spacing(4),
   fontSize: '2rem',
   textAlign: 'center',
   textTransform: 'uppercase',
   ':hover': {
     cursor: 'pointer',
     color: theme.palette.primary.light,
-    backgroundColor: theme.gray3,
+    backgroundColor: theme.gray4,
   },
   '& .MuiSvgIcon-root': {
     fontSize: '7rem',
-    marginTop: '1rem',
+    marginTop: '1.5rem',
   },
 }))
 
@@ -80,10 +84,10 @@ export const Home = () => {
       <Grid container spacing={4} columns={{ xs: 4, sm: 8, md: 12 }}>
         {pageLinks.map((pageLink: PageLink, index) => (
           <Grid item xs={2} sm={4} md={4} key={index}>
-            <StyledLinkPaper elevation={0} onClick={() => onItemClick(pageLink.route)}>
+            <StyledLinkBox onClick={() => onItemClick(pageLink.route)}>
               <Typography variant='h6'>{pageLink.route}</Typography>
               {pageLink.icon}
-            </StyledLinkPaper>
+            </StyledLinkBox>
           </Grid>
         ))}
       </Grid>

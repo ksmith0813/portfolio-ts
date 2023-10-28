@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+import registerReducer from './slices/registerSlice'
 
 const persistConfig = {
   key: 'root',
@@ -9,7 +10,7 @@ const persistConfig = {
 }
 
 const reducers = combineReducers({
-  // TODO
+  registerReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, reducers)

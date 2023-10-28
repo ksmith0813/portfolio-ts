@@ -2,6 +2,8 @@ import { createTheme } from '@mui/material'
 
 declare module '@mui/material/styles' {
   interface Theme {
+    primary: string
+    primaryLight: string
     header: string
     hero: string
     gray9: string
@@ -16,6 +18,8 @@ declare module '@mui/material/styles' {
     gray0: string
   }
   interface ThemeOptions {
+    primary: string
+    primaryLight: string
     header: string
     hero: string
     gray9: string
@@ -31,7 +35,9 @@ declare module '@mui/material/styles' {
   }
 }
 
-export const theme = createTheme({
+const defaultTheme = {
+  primary: '#1890ff',
+  primaryLight: '#dbf4ff',
   header: '#000000',
   hero: 'radial-gradient(circle, rgba(25,118,210,1) 0%, rgba(9,9,121,1) 0%, rgba(25,118,210,1) 100%)',
   gray9: '#22262a',
@@ -44,4 +50,36 @@ export const theme = createTheme({
   gray2: '#eff2f5',
   gray1: '#f8f9fa',
   gray0: '#fafafa',
+}
+
+export const theme = createTheme({
+  primary: defaultTheme.primary,
+  primaryLight: defaultTheme.primaryLight,
+  header: defaultTheme.header,
+  hero: defaultTheme.hero,
+  gray9: defaultTheme.gray9,
+  gray8: defaultTheme.gray8,
+  gray7: defaultTheme.gray7,
+  gray6: defaultTheme.gray6,
+  gray5: defaultTheme.gray5,
+  gray4: defaultTheme.gray4,
+  gray3: defaultTheme.gray3,
+  gray2: defaultTheme.gray2,
+  gray1: defaultTheme.gray1,
+  gray0: defaultTheme.gray0,
+  components: {
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          '&.Mui-selected': {
+            backgroundColor: defaultTheme.primaryLight,
+            color: defaultTheme.primary,
+            '& .MuiListItemIcon-root': {
+              color: defaultTheme.primary,
+            },
+          },
+        },
+      },
+    },
+  },
 })

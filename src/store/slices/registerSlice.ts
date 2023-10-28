@@ -1,4 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { validateProperty, validateRequiredFields } from 'components/_siteWide/form/baseValidator'
+import { validateEmail } from 'components/_siteWide/form/validateEmail'
+import { validatePhone } from 'components/_siteWide/form/validatePhone'
+import { validateZip } from 'components/_siteWide/form/validateZip'
 import { RootState } from 'store/store'
 
 export interface ContactProps {
@@ -126,7 +130,7 @@ export const registerSlice = createSlice({
       state.clean = true
     },
     nextStep: (state, action: PayloadAction<any>) => {
-      if (handleFormUpdate(state, action.payload)) {
+      if (validateFormUpdate(state, action.payload)) {
         state.step = state.step + 1
         state.clean = true
       }
@@ -142,46 +146,53 @@ export const registerSelector = (state: RootState) => state.registerReducer
 
 export default registerSlice.reducer
 
-const handleFormUpdate = (state: any, payload: any) => {
+const validateFormUpdate = (state: any, payload: any) => {
   let isValid = true
   switch (state.step) {
     case 1:
-      isValid = handleMovieUpdate(payload)
+      isValid = validateMovieUpdate(payload)
       break
     case 2:
-      isValid = handleMusicUpdate(payload)
+      isValid = validateMusicUpdate(payload)
       break
     case 3:
-      isValid = handleTravelUpdate(payload)
+      isValid = validateTravelUpdate(payload)
       break
     default:
-      isValid = handleContactUpdate(payload)
+      isValid = validateContactUpdate(payload)
       break
   }
 
   return isValid
 }
 
-const handleContactUpdate = (payload: ContactProps) => {
+const validateContactUpdate = (payload: ContactProps) => {
   let copy = { ...payload }
   copy.errors = []
+  validateRequiredFields(copy, ['step', 'apt'])
+  validateProperty(validateZip, copy, 'zip', true)
+  validateProperty(validatePhone, copy, 'phone', true)
+  validateProperty(validateEmail, copy, 'email', true)
   return !copy.errors.length
 }
 
-const handleMovieUpdate = (payload: MovieProps) => {
+const validateMovieUpdate = (payload: MovieProps) => {
   let copy = { ...payload }
   copy.errors = []
+  validateRequiredFields(copy)
   return !copy.errors.length
 }
 
-const handleMusicUpdate = (payload: MusicProps) => {
+const validateMusicUpdate = (payload: MusicProps) => {
   let copy = { ...payload }
   copy.errors = []
+  validateRequiredFields(copy, ['step', 'instruments', 'soundCloud'])
   return !copy.errors.length
 }
 
-const handleTravelUpdate = (payload: TravelProps) => {
+const validateTravelUpdate = (payload: TravelProps) => {
   let copy = { ...payload }
   copy.errors = []
+  validateRequiredFields(copy, ['step', 'placesVisited'])
   return !copy.errors.length
 }

@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client'
-import { Router } from 'components/navigation/router'
+import { Router } from 'router'
 import 'index.scss'
 
 const container = document.getElementById('root')

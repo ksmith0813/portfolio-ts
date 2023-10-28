@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { Provider } from 'react-redux'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import {
   AppBar,
@@ -19,9 +20,8 @@ import {
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import { PageLink, pageLinks } from 'components/_siteWide/pageLink'
-import { theme } from 'theme/theme'
-import { Provider } from 'react-redux'
 import { store } from 'store/store'
+import { theme } from 'theme/theme'
 
 const StyledAppBar = styled(AppBar)({
   background: theme.header,
@@ -51,6 +51,39 @@ const ExternalLinks = () => (
   </Box>
 )
 
+const Pages = () => {
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
+
+  const onItemClick = (page: string) => navigate(`../${page}`)
+
+  return (
+    <Box sx={{ overflow: 'auto' }}>
+      <List>
+        {pageLinks.map((pageLink: PageLink) => {
+          const route = pageLink.route
+          return (
+            <ListItem key={route} disablePadding sx={{ display: 'block' }} onClick={() => onItemClick(route)}>
+              <ListItemButton selected={route === pathname}>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: 2,
+                    justifyContent: 'center',
+                  }}
+                >
+                  {pageLink.icon}
+                </ListItemIcon>
+                <StyledListItemText primary={route.substring(1)} />
+              </ListItemButton>
+            </ListItem>
+          )
+        })}
+      </List>
+    </Box>
+  )
+}
+
 export const App = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
@@ -58,8 +91,6 @@ export const App = () => {
   useEffect(() => {
     if (pathname === '/') navigate('../home')
   }, [pathname, navigate])
-
-  const onItemClick = (page: string) => navigate(`../${page}`)
 
   return (
     <Provider store={store}>
@@ -83,29 +114,7 @@ export const App = () => {
           }}
         >
           <Toolbar />
-          <Box sx={{ overflow: 'auto' }}>
-            <List>
-              {pageLinks.map((pageLink: PageLink) => {
-                const route = pageLink.route
-                return (
-                  <ListItem key={route} disablePadding sx={{ display: 'block' }} onClick={() => onItemClick(route)}>
-                    <ListItemButton selected={route === pathname}>
-                      <ListItemIcon
-                        sx={{
-                          minWidth: 0,
-                          mr: 2,
-                          justifyContent: 'center',
-                        }}
-                      >
-                        {pageLink.icon}
-                      </ListItemIcon>
-                      <StyledListItemText primary={route.substring(1)} />
-                    </ListItemButton>
-                  </ListItem>
-                )
-              })}
-            </List>
-          </Box>
+          <Pages />
         </Drawer>
         <StyledBoxOutlet>
           <Outlet />

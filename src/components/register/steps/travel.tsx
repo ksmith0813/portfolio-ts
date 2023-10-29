@@ -26,21 +26,12 @@ export const Travel = () => {
           <Grid item xs={2} sm={6} md={12}>
             <Autocomplete
               options={countries.map((country: CountryProps) => country.label)}
-              isOptionEqualToValue={useCallback((option: any, value: any) => option.value === value.value, [])}
               value={travel.favoriteCountries}
-              multiple
+              onChange={(_e: any, value: any) => setRegisterTravel({ ...travel, favoriteCountries: value })}
+              renderInput={(params) => <TextField {...params} label='Favorite Countries *' />}
               fullWidth
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label='Favorite Countries *'
-                  onChange={(e) => setRegisterTravel({ ...travel, favoriteCountries: [e.target.value] })}
-                  inputProps={{
-                    ...params.inputProps,
-                    autoComplete: 'new-password',
-                  }}
-                />
-              )}
+              multiple
+              freeSolo
             />
             {errors.favoriteGenres && <p>Favorite Countries are required.</p>}
           </Grid>
@@ -58,21 +49,12 @@ export const Travel = () => {
           <Grid item xs={2} sm={6} md={12}>
             <Autocomplete
               options={countries.map((country: CountryProps) => country.label)}
-              isOptionEqualToValue={useCallback((option: any, value: any) => option.value === value.value, [])}
               value={travel.placesVisited}
-              multiple
+              onChange={(_e: any, value: any) => setRegisterTravel({ ...travel, placesVisited: value })}
+              renderInput={(params) => <TextField {...params} label='Places Visited' />}
               fullWidth
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label='Places Visited'
-                  onChange={(e) => setRegisterTravel({ ...travel, placesVisited: [e.target.value] })}
-                  inputProps={{
-                    ...params.inputProps,
-                    autoComplete: 'new-password',
-                  }}
-                />
-              )}
+              multiple
+              freeSolo
             />
             {errors.favoriteGenres && <p>Favorite City are required.</p>}
           </Grid>

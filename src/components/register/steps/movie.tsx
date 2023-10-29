@@ -37,20 +37,12 @@ export const Movie = () => {
           <Grid item xs={2} sm={6} md={12}>
             <Autocomplete
               options={movieGenres.map((genre: MovieProps) => genre.label)}
-              isOptionEqualToValue={useCallback((option: any, value: any) => option.value === value.value, [])}
               value={movie.favoriteGenres}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label='Favorite Genre *'
-                  onChange={(e) => setRegisterMovie({ ...movie, favoriteGenres: [e.target.value] })}
-                  inputProps={{
-                    ...params.inputProps,
-                    autoComplete: 'new-password',
-                  }}
-                />
-              )}
+              onChange={(_e: any, value: any) => setRegisterMovie({ ...movie, favoriteGenres: value })}
+              renderInput={(params) => <TextField {...params} label='Favorite Genre *' />}
               fullWidth
+              multiple
+              freeSolo
             />
             {errors.favoriteGenres && <p>Favorite Genres are required.</p>}
           </Grid>

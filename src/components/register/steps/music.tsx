@@ -48,21 +48,12 @@ export const Music = () => {
           <Grid item xs={2} sm={6} md={12}>
             <Autocomplete
               options={instruments.map((instrument: InstrumentProps) => instrument.label)}
-              isOptionEqualToValue={useCallback((option: any, value: any) => option.value === value.value, [])}
               value={music.instruments}
-              multiple
+              onChange={(_e: any, value: any) => setRegisterMusic({ ...music, instruments: value })}
+              renderInput={(params) => <TextField {...params} label='Instruments' />}
               fullWidth
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label='Instruments'
-                  onChange={(e) => setRegisterMusic({ ...music, instruments: [e.target.value] })}
-                  inputProps={{
-                    ...params.inputProps,
-                    autoComplete: 'new-password',
-                  }}
-                />
-              )}
+              multiple
+              freeSolo
             />
             {errors.favoriteGenres && <p>Favorite Genres are required.</p>}
           </Grid>

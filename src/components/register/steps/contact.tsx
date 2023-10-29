@@ -82,20 +82,11 @@ export const Contact = () => {
           <Grid item xs={2} sm={4} md={4}>
             <Autocomplete
               options={states.map((filteredState: StateProps) => filteredState.label)}
-              isOptionEqualToValue={useCallback((option: any, value: any) => option.value === value.value, [])}
               value={contact.state}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label='Choose a State *'
-                  onChange={(e) => setRegisterContact({ ...contact, state: e.target.value })}
-                  inputProps={{
-                    ...params.inputProps,
-                    autoComplete: 'new-password',
-                  }}
-                />
-              )}
+              onChange={(_e: any, value: any) => setRegisterContact({ ...contact, state: value })}
+              renderInput={(params) => <TextField {...params} label='Choose a State *' />}
               fullWidth
+              freeSolo
             />
             {errors.state && <p>State is required.</p>}
           </Grid>

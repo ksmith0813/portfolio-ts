@@ -6,6 +6,7 @@ import {
   RegisterProps,
   TravelProps,
   complete,
+  nextStep,
   previousStep,
   registerSelector,
   reset,
@@ -16,7 +17,7 @@ import {
   setTravel,
 } from 'store/slices/registerSlice'
 
-export const useCatReducer = () => {
+export const useRegisterReducer = () => {
   const dispatch = useAppDispatch()
 
   const registerState: RegisterProps = useAppSelector(registerSelector)
@@ -35,6 +36,8 @@ export const useCatReducer = () => {
 
   const previousRegisterStep = () => dispatch(previousStep())
 
+  const nextRegisterStep = (step: any) => dispatch(nextStep(step))
+
   const completeRegistration = () => dispatch(complete())
 
   return {
@@ -46,6 +49,7 @@ export const useCatReducer = () => {
     setRegisterTravel,
     resetRegisterStep,
     previousRegisterStep,
+    nextRegisterStep,
     completeRegistration,
   }
 }

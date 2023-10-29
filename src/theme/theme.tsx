@@ -6,6 +6,8 @@ declare module '@mui/material/styles' {
     primaryLight: string
     header: string
     hero: string
+    linearGradient: string
+    linearGradientAngle: string
     gray9: string
     gray8: string
     gray7: string
@@ -22,6 +24,8 @@ declare module '@mui/material/styles' {
     primaryLight: string
     header: string
     hero: string
+    linearGradient: string
+    linearGradientAngle: string
     gray9: string
     gray8: string
     gray7: string
@@ -40,6 +44,8 @@ const defaultTheme = {
   primaryLight: '#dbf4ff',
   header: '#000000',
   hero: 'radial-gradient(circle, rgba(25,118,210,1) 0%, rgba(9,9,121,1) 0%, rgba(25,118,210,1) 100%)',
+  linearGradient: 'linear-gradient(95deg, rgba(0,212,255,1) 0%, rgba(9,9,121,1) 75%, rgba(2,0,36,1) 100%)',
+  linearGradientAngle: 'linear-gradient(136deg, rgba(0,212,255,1) 0%, rgba(9,9,121,1) 75%, rgba(2,0,36,1) 100%)',
   gray9: '#22262a',
   gray8: '#2e3235',
   gray7: '#495057',
@@ -57,6 +63,8 @@ export const theme = createTheme({
   primaryLight: defaultTheme.primaryLight,
   header: defaultTheme.header,
   hero: defaultTheme.hero,
+  linearGradient: defaultTheme.linearGradient,
+  linearGradientAngle: defaultTheme.linearGradientAngle,
   gray9: defaultTheme.gray9,
   gray8: defaultTheme.gray8,
   gray7: defaultTheme.gray7,

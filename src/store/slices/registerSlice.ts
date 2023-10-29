@@ -1,8 +1,4 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { validateProperty, validateRequiredFields } from 'components/_siteWide/form/baseValidator'
-import { validateEmail } from 'components/_siteWide/form/validateEmail'
-import { validatePhone } from 'components/_siteWide/form/validatePhone'
-import { validateZip } from 'components/_siteWide/form/validateZip'
 import { RootState } from 'store/store'
 
 export interface ContactProps {
@@ -19,8 +15,8 @@ export interface ContactProps {
 }
 
 export interface MovieProps {
-  FavoriteMovie: string
-  FavoriteGenres: string[]
+  favoriteMovie: string
+  favoriteGenres: string[]
   errors: string[]
 }
 
@@ -62,8 +58,8 @@ const defaultContact: ContactProps = {
 }
 
 const defaultMovie: MovieProps = {
-  FavoriteMovie: '',
-  FavoriteGenres: [],
+  favoriteMovie: '',
+  favoriteGenres: [],
   errors: [],
 }
 
@@ -169,30 +165,23 @@ const validateFormUpdate = (state: any, payload: any) => {
 const validateContactUpdate = (payload: ContactProps) => {
   let copy = { ...payload }
   copy.errors = []
-  validateRequiredFields(copy, ['step', 'apt'])
-  validateProperty(validateZip, copy, 'zip', true)
-  validateProperty(validatePhone, copy, 'phone', true)
-  validateProperty(validateEmail, copy, 'email', true)
   return !copy.errors.length
 }
 
 const validateMovieUpdate = (payload: MovieProps) => {
   let copy = { ...payload }
   copy.errors = []
-  validateRequiredFields(copy)
   return !copy.errors.length
 }
 
 const validateMusicUpdate = (payload: MusicProps) => {
   let copy = { ...payload }
   copy.errors = []
-  validateRequiredFields(copy, ['step', 'instruments', 'soundCloud'])
   return !copy.errors.length
 }
 
 const validateTravelUpdate = (payload: TravelProps) => {
   let copy = { ...payload }
   copy.errors = []
-  validateRequiredFields(copy, ['step', 'placesVisited'])
   return !copy.errors.length
 }

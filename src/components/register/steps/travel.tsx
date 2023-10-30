@@ -1,4 +1,3 @@
-import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { Autocomplete, Grid, TextField } from '@mui/material'
 import { FormTextField } from 'components/_siteWide/formTextField'
@@ -15,52 +14,50 @@ export const Travel = () => {
 
   const {
     register,
-    handleSubmit,
+    reset,
     formState: { errors },
   } = useForm()
 
   return (
-    <>
-      <form onSubmit={handleSubmit((data) => console.log(data))}>
-        <Grid container spacing={4}>
-          <Grid item xs={2} sm={6} md={12}>
-            <Autocomplete
-              options={countries.map((country: CountryProps) => country.label)}
-              value={travel.favoriteCountries}
-              onChange={(_e: any, value: any) => setRegisterTravel({ ...travel, favoriteCountries: value })}
-              renderInput={(params) => <TextField {...params} label='Favorite Countries *' />}
-              fullWidth
-              multiple
-              freeSolo
-            />
-            {errors.favoriteGenres && <p>Favorite Countries are required.</p>}
-          </Grid>
-          <Grid item xs={2} sm={6} md={12}>
-            <FormTextField
-              register={register}
-              label='Favorite City'
-              property='favoriteCity'
-              element={travel}
-              setElement={setRegisterTravel}
-              errors={errors}
-              required
-            />
-          </Grid>
-          <Grid item xs={2} sm={6} md={12}>
-            <Autocomplete
-              options={countries.map((country: CountryProps) => country.label)}
-              value={travel.placesVisited}
-              onChange={(_e: any, value: any) => setRegisterTravel({ ...travel, placesVisited: value })}
-              renderInput={(params) => <TextField {...params} label='Places Visited' />}
-              fullWidth
-              multiple
-              freeSolo
-            />
-            {errors.favoriteGenres && <p>Favorite City are required.</p>}
-          </Grid>
+    <form>
+      <Grid container spacing={4}>
+        <Grid item xs={2} sm={6} md={12}>
+          <Autocomplete
+            options={countries.map((country: CountryProps) => country.label)}
+            value={travel.favoriteCountries}
+            onChange={(_e: any, value: any) => setRegisterTravel({ ...travel, favoriteCountries: value })}
+            renderInput={(params) => <TextField {...params} label='Favorite Countries *' />}
+            fullWidth
+            multiple
+            freeSolo
+          />
+          {errors.favoriteGenres && <p>Favorite Countries are required.</p>}
         </Grid>
-        <Actions submit={onSubmit} />
-      </form>
-    </>
+        <Grid item xs={2} sm={6} md={12}>
+          <FormTextField
+            register={register}
+            label='Favorite City'
+            property='favoriteCity'
+            element={travel}
+            setElement={setRegisterTravel}
+            errors={errors}
+            required
+          />
+        </Grid>
+        <Grid item xs={2} sm={6} md={12}>
+          <Autocomplete
+            options={countries.map((country: CountryProps) => country.label)}
+            value={travel.placesVisited}
+            onChange={(_e: any, value: any) => setRegisterTravel({ ...travel, placesVisited: value })}
+            renderInput={(params) => <TextField {...params} label='Places Visited' />}
+            fullWidth
+            multiple
+            freeSolo
+          />
+          {errors.favoriteGenres && <p>Favorite City are required.</p>}
+        </Grid>
+      </Grid>
+      <Actions reset={reset} submit={onSubmit} />
+    </form>
   )
 }

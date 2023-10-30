@@ -2,7 +2,7 @@ import { UseFormRegister, FieldErrors, FieldValues } from 'react-hook-form'
 import { TextField } from '@mui/material'
 
 interface FormTextFieldProps {
-  register: UseFormRegister<FieldValues>
+  register: any
   label: string
   property: string
   element: any
@@ -25,7 +25,7 @@ export const FormTextField = ({
   <>
     <TextField
       {...register(property, { required: required || false, pattern })}
-      defaultValue={element[property]}
+      value={element[property] || ''}
       label={label}
       onChange={(e) => setElement({ ...element, [`${property}`]: e.target.value })}
       fullWidth

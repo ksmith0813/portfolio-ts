@@ -44,7 +44,7 @@ const defaultTheme = {
   primaryLight: '#dbf4ff',
   header: '#000000',
   hero: 'radial-gradient(circle, rgba(25,118,210,1) 0%, rgba(9,9,121,1) 0%, rgba(25,118,210,1) 100%)',
-  linearGradient: 'linear-gradient(95deg, rgba(0,212,255,1) 0%, rgba(9,9,121,1) 75%, rgba(2,0,36,1) 100%)',
+  linearGradient: 'linear-gradient(95deg, rgba(0,212,255,1) 0%, rgba(9,9,121,1) 50%, rgba(2,0,36,1) 100%)',
   linearGradientAngle: 'linear-gradient(136deg, rgba(0,212,255,1) 0%, rgba(9,9,121,1) 75%, rgba(2,0,36,1) 100%)',
   gray9: '#22262a',
   gray8: '#2e3235',

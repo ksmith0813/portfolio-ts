@@ -120,7 +120,7 @@ export const Register = () => {
           </Step>
         ))}
       </Stepper>
-      <Box sx={{ mt: '3rem' }}>{steps[registerState.step].content}</Box>
+      <Box sx={{ mt: '3rem', width: '50%' }}>{steps[registerState.step].content}</Box>
     </StyledRegisterBox>
   )
 }

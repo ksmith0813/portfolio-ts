@@ -5,7 +5,7 @@ import { useDemoData } from '@mui/x-data-grid-generator'
 export const Table = () => {
   const { data } = useDemoData({
     dataSet: 'Commodity',
-    rowLength: 100000,
+    rowLength: 1000,
     editable: true,
   })
 

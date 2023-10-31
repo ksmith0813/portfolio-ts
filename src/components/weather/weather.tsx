@@ -1,3 +1,9 @@
 import { Typography } from '@mui/material'
+import { PageHeader } from 'components/_siteWide/pageHeader'
 
-export const Weather = () => <Typography variant='h5'>Weather content goes here</Typography>
+export const Weather = () => (
+  <>
+    <PageHeader title='Weather' />
+    <Typography>Content goes here</Typography>
+  </>
+)

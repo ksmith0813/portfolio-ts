@@ -1,3 +1,9 @@
-import { Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
+import { PageHeader } from 'components/_siteWide/pageHeader'
 
-export const List = () => <Typography variant='h5'>List content goes here</Typography>
+export const List = () => (
+  <>
+    <PageHeader title='List' />
+    <Typography>Content goes here</Typography>
+  </>
+)

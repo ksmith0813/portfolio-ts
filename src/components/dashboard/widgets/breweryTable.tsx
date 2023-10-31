@@ -31,6 +31,7 @@ const beerColumns: GridColDef[] = [
     flex: 1,
   },
 ]
+
 export const BreweryTable = () => {
   const { data } = useGetBeerQuery()
 

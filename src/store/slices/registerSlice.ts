@@ -78,16 +78,18 @@ const defaultTravel: TravelProps = {
   errors: [],
 }
 
+const initialState = {
+  step: 0,
+  clean: true,
+  contact: defaultContact,
+  movie: defaultMovie,
+  music: defaultMusic,
+  travel: defaultTravel,
+}
+
 export const registerSlice = createSlice({
   name: 'register',
-  initialState: {
-    step: 0,
-    clean: true,
-    contact: defaultContact,
-    movie: defaultMovie,
-    music: defaultMusic,
-    travel: defaultTravel,
-  },
+  initialState,
   reducers: {
     setClean: (state, action: PayloadAction<boolean>) => {
       state.clean = action.payload
@@ -138,7 +140,7 @@ export const registerSlice = createSlice({
 export const { setClean, setContact, setMovie, setMusic, setTravel, reset, previousStep, nextStep, complete } =
   registerSlice.actions
 
-export const registerSelector = (state: RootState) => state.registerReducer
+export const registerSelector = (state: RootState) => state.register
 
 export default registerSlice.reducer
 

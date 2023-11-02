@@ -5,6 +5,15 @@ import { LineChartContent } from 'components/_siteWide/charts/lineChartContent'
 import { TreeMap } from 'components/_siteWide/charts/treeMapContent'
 import { BarChart } from 'components/_siteWide/charts/barChartContent'
 
+const StyledGridTopContainer = styled(Grid)({
+  margin: '1.5rem 2rem 0 0',
+})
+
+const StyledGridBottomContainer = styled(Grid)({
+  margin: '0rem 2rem 0 0',
+  paddingTop: '1.5rem',
+})
+
 const StyledDashboardGridItem = styled(Grid)(({ theme }) => ({
   backgroundColor: theme.gray2,
   minHeight: 400,
@@ -15,22 +24,22 @@ export const Dashboard = () => {
   return (
     <Box sx={{ mr: '2rem' }}>
       <PageHeader title='Dashboard' />
-      <Grid container spacing={4} sx={{ mt: '1.5rem', ml: '0rem', mr: '2rem' }}>
+      <StyledGridTopContainer container spacing={4}>
         <StyledDashboardGridItem item xs={4}>
           <LineChartContent />
         </StyledDashboardGridItem>
         <StyledDashboardGridItem item xs={8}>
           <BreweryTable />
         </StyledDashboardGridItem>
-      </Grid>
-      <Grid container spacing={4} sx={{ pt: '1.5rem', ml: '0rem', mr: '2rem', height: '100%' }}>
+      </StyledGridTopContainer>
+      <StyledGridBottomContainer container spacing={4}>
         <StyledDashboardGridItem item xs={8}>
           <TreeMap />
         </StyledDashboardGridItem>
         <StyledDashboardGridItem item xs={4}>
           <BarChart />
         </StyledDashboardGridItem>
-      </Grid>
+      </StyledGridBottomContainer>
     </Box>
   )
 }

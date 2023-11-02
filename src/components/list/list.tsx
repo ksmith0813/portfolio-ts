@@ -18,7 +18,7 @@ import {
 import FolderIcon from '@mui/icons-material/Folder'
 import DeleteIcon from '@mui/icons-material/Delete'
 
-function generate(element: ReactElement) {
+const generateListItem = (element: ReactElement) => {
   return [0, 1, 2].map((value) =>
     cloneElement(element, {
       key: value,
@@ -53,7 +53,7 @@ export const List = () => {
           </Typography>
           <StyledList>
             <MuiList dense={dense}>
-              {generate(
+              {generateListItem(
                 <ListItem>
                   <ListItemText primary='Single-line item' secondary={secondary ? 'Secondary text' : null} />
                 </ListItem>,
@@ -67,7 +67,7 @@ export const List = () => {
           </Typography>
           <StyledList>
             <MuiList dense={dense}>
-              {generate(
+              {generateListItem(
                 <ListItem>
                   <ListItemIcon>
                     <FolderIcon />
@@ -86,7 +86,7 @@ export const List = () => {
           </Typography>
           <StyledList>
             <MuiList dense={dense}>
-              {generate(
+              {generateListItem(
                 <ListItem>
                   <ListItemAvatar>
                     <Avatar>
@@ -105,7 +105,7 @@ export const List = () => {
           </Typography>
           <StyledList>
             <MuiList dense={dense}>
-              {generate(
+              {generateListItem(
                 <ListItem
                   secondaryAction={
                     <IconButton edge='end' aria-label='delete'>

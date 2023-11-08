@@ -140,7 +140,7 @@ export const registerSlice = createSlice({
 export const { setClean, setContact, setMovie, setMusic, setTravel, reset, previousStep, nextStep, complete } =
   registerSlice.actions
 
-export const registerSelector = (state: RootState) => state.register
+export const registerSelector = (state: RootState) => state.persistedReducer.register
 
 export default registerSlice.reducer
 

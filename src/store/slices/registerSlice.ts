@@ -38,6 +38,7 @@ export interface TravelProps {
 export interface RegisterProps {
   step: number
   clean: boolean
+  complete: boolean
   contact: ContactProps
   movie: MovieProps
   music: MusicProps
@@ -81,6 +82,7 @@ const defaultTravel: TravelProps = {
 const initialState = {
   step: 0,
   clean: true,
+  complete: false,
   contact: defaultContact,
   movie: defaultMovie,
   music: defaultMusic,
@@ -133,7 +135,9 @@ export const registerSlice = createSlice({
         state.clean = true
       }
     },
-    complete: () => alert('Your information has been successfully submitted!'),
+    complete: (state) => {
+      state.complete = true
+    },
   },
 })
 

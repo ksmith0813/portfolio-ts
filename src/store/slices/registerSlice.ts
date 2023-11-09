@@ -93,19 +93,19 @@ export const registerSlice = createSlice({
   name: 'register',
   initialState,
   reducers: {
-    setClean: (state, action: PayloadAction<boolean>) => {
+    setClean: (state: RegisterProps, action: PayloadAction<boolean>) => {
       state.clean = action.payload
     },
-    setContact: (state, action: PayloadAction<ContactProps>) => {
+    setContact: (state: RegisterProps, action: PayloadAction<ContactProps>) => {
       state.contact = action.payload
     },
-    setMovie: (state, action: PayloadAction<MovieProps>) => {
+    setMovie: (state: RegisterProps, action: PayloadAction<MovieProps>) => {
       state.movie = action.payload
     },
-    setMusic: (state, action: PayloadAction<MusicProps>) => {
+    setMusic: (state: RegisterProps, action: PayloadAction<MusicProps>) => {
       state.music = action.payload
     },
-    setTravel: (state, action: PayloadAction<TravelProps>) => {
+    setTravel: (state: RegisterProps, action: PayloadAction<TravelProps>) => {
       state.travel = action.payload
     },
     reset: (state: RegisterProps) => {
@@ -125,24 +125,35 @@ export const registerSlice = createSlice({
       }
       state.clean = true
     },
+    resetAll: () => initialState,
     previousStep: (state) => {
       state.step = state.step - 1
       state.clean = true
     },
-    nextStep: (state, action: PayloadAction<any>) => {
+    nextStep: (state: RegisterProps, action: PayloadAction<any>) => {
       if (validateFormUpdate(state, action.payload)) {
         state.step = state.step + 1
         state.clean = true
       }
     },
-    complete: (state) => {
+    complete: (state: RegisterProps) => {
       state.complete = true
     },
   },
 })
 
-export const { setClean, setContact, setMovie, setMusic, setTravel, reset, previousStep, nextStep, complete } =
-  registerSlice.actions
+export const {
+  setClean,
+  setContact,
+  setMovie,
+  setMusic,
+  setTravel,
+  reset,
+  resetAll,
+  previousStep,
+  nextStep,
+  complete,
+} = registerSlice.actions
 
 export const registerSelector = (state: RootState) => state.persistedReducer.register
 

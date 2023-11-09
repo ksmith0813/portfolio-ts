@@ -10,6 +10,7 @@ import {
   previousStep,
   registerSelector,
   reset,
+  resetAll,
   setClean,
   setContact,
   setMovie,
@@ -34,6 +35,8 @@ export const useRegisterReducer = () => {
 
   const resetRegisterStep = () => dispatch(reset())
 
+  const resetRegistration = () => dispatch(resetAll())
+
   const previousRegisterStep = () => dispatch(previousStep())
 
   const nextRegisterStep = (step: any) => dispatch(nextStep(step))
@@ -48,6 +51,7 @@ export const useRegisterReducer = () => {
     setRegisterMusic,
     setRegisterTravel,
     resetRegisterStep,
+    resetRegistration,
     previousRegisterStep,
     nextRegisterStep,
     completeRegistration,

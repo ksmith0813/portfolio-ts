@@ -51,7 +51,7 @@ const ExternalLinks = () => (
   </Box>
 )
 
-const Pages = () => {
+const SideNav = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
@@ -114,7 +114,7 @@ export const App = () => {
           }}
         >
           <Toolbar />
-          <Pages />
+          <SideNav />
         </Drawer>
         <StyledBoxOutlet>
           <Outlet />

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Box } from '@mui/material'
+import { Box, styled } from '@mui/material'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { PageHeader } from 'components/_siteWide/pageHeader'
 import { useGetUsersQuery } from 'store/api/userApi'
@@ -62,6 +62,18 @@ const userColumns: GridColDef[] = [
   },
 ]
 
+const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
+  '& .MuiDataGrid-row:nth-child(odd)': {
+    backgroundColor: theme.gray1,
+  },
+  '& .MuiDataGrid-row:hover': {
+    backgroundColor: `${theme.primaryLight}`,
+  },
+  '& .MuiDataGrid-row.Mui-selected': {
+    backgroundColor: `${theme.primaryLight}`,
+  },
+}))
+
 export const Table = () => {
   const { data } = useGetUsersQuery()
 
@@ -72,8 +84,8 @@ export const Table = () => {
   return (
     <Box sx={{ height: 'calc(100vh - 175px)' }}>
       <PageHeader title='Table' />
-      <DataGrid
-        loading={!userData}
+      <StyledDataGrid
+        loading={!userData || userData?.length === 0}
         rows={userData}
         columns={userColumns}
         getRowId={(row: any) => row.id + row.name.first}

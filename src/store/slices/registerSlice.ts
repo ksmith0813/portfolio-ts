@@ -37,7 +37,6 @@ export interface TravelProps {
 
 export interface RegisterProps {
   step: number
-  clean: boolean
   complete: boolean
   contact: ContactProps
   movie: MovieProps
@@ -81,7 +80,6 @@ const defaultTravel: TravelProps = {
 
 const initialState = {
   step: 0,
-  clean: true,
   complete: false,
   contact: defaultContact,
   movie: defaultMovie,
@@ -93,9 +91,6 @@ export const registerSlice = createSlice({
   name: 'register',
   initialState,
   reducers: {
-    setClean: (state: RegisterProps, action: PayloadAction<boolean>) => {
-      state.clean = action.payload
-    },
     setContact: (state: RegisterProps, action: PayloadAction<ContactProps>) => {
       state.contact = action.payload
     },
@@ -123,17 +118,14 @@ export const registerSlice = createSlice({
           state.contact = defaultContact
           break
       }
-      state.clean = true
     },
     resetAll: () => initialState,
     previousStep: (state) => {
       state.step = state.step - 1
-      state.clean = true
     },
     nextStep: (state: RegisterProps, action: PayloadAction<any>) => {
       if (validateFormUpdate(state, action.payload)) {
         state.step = state.step + 1
-        state.clean = true
       }
     },
     complete: (state: RegisterProps) => {
@@ -142,18 +134,8 @@ export const registerSlice = createSlice({
   },
 })
 
-export const {
-  setClean,
-  setContact,
-  setMovie,
-  setMusic,
-  setTravel,
-  reset,
-  resetAll,
-  previousStep,
-  nextStep,
-  complete,
-} = registerSlice.actions
+export const { setContact, setMovie, setMusic, setTravel, reset, resetAll, previousStep, nextStep, complete } =
+  registerSlice.actions
 
 export const registerSelector = (state: RootState) => state.persistedReducer.register
 

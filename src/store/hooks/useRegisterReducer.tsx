@@ -11,7 +11,6 @@ import {
   registerSelector,
   reset,
   resetAll,
-  setClean,
   setContact,
   setMovie,
   setMusic,
@@ -22,8 +21,6 @@ export const useRegisterReducer = () => {
   const dispatch = useAppDispatch()
 
   const registerState: RegisterProps = useAppSelector(registerSelector)
-
-  const setRegisterClean = (clean: boolean) => dispatch(setClean(clean))
 
   const setRegisterContact = (contact: ContactProps) => dispatch(setContact(contact))
 
@@ -45,7 +42,6 @@ export const useRegisterReducer = () => {
 
   return {
     registerState,
-    setRegisterClean,
     setRegisterContact,
     setRegisterMovie,
     setRegisterMusic,

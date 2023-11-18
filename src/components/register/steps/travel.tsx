@@ -1,6 +1,5 @@
-import { useForm } from 'react-hook-form'
 import { Autocomplete, Grid, TextField } from '@mui/material'
-import { FormTextField } from 'components/_siteWide/formTextField'
+import { FormTextField } from 'components/_siteWide/form/formTextField'
 import { CountryProps, countries } from 'data/dropDowns/countries'
 import { useRegisterReducer } from 'store/hooks/useRegisterReducer'
 import { Actions } from './actions'
@@ -11,12 +10,6 @@ export const Travel = () => {
   const travel = registerState.travel
 
   const onSubmit = () => nextRegisterStep(travel)
-
-  const {
-    register,
-    reset,
-    formState: { errors },
-  } = useForm()
 
   return (
     <form>
@@ -31,16 +24,13 @@ export const Travel = () => {
             multiple
             freeSolo
           />
-          {errors.favoriteGenres && <p>Favorite Countries are required.</p>}
         </Grid>
         <Grid item xs={2} sm={6} md={12}>
           <FormTextField
-            register={register}
             label='Favorite City'
             property='favoriteCity'
             element={travel}
             setElement={setRegisterTravel}
-            errors={errors}
             required
           />
         </Grid>
@@ -54,10 +44,9 @@ export const Travel = () => {
             multiple
             freeSolo
           />
-          {errors.favoriteGenres && <p>Favorite City are required.</p>}
         </Grid>
       </Grid>
-      <Actions reset={reset} submit={onSubmit} />
+      <Actions submit={onSubmit} />
     </form>
   )
 }

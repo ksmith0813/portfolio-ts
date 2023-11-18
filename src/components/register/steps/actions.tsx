@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { Alert, Box, Button, styled, Slide, Typography } from '@mui/material'
 import { useRegisterReducer } from 'store/hooks/useRegisterReducer'
 interface ActionProps {
-  reset?: () => void
   submit: () => void
 }
 
@@ -18,7 +17,7 @@ const StyledCompleteAlert = styled(Alert)({
   top: 'calc(64px + 1rem)',
 })
 
-export const Actions = ({ reset, submit }: ActionProps) => {
+export const Actions = ({ submit }: ActionProps) => {
   const { registerState, previousRegisterStep, resetRegisterStep, resetRegistration, completeRegistration } =
     useRegisterReducer()
   const containerRef = useRef<HTMLElement>(null)
@@ -43,15 +42,7 @@ export const Actions = ({ reset, submit }: ActionProps) => {
     <>
       <StyledActionBox>
         {step < 4 && (
-          <Button
-            variant='outlined'
-            sx={{ mr: '1rem' }}
-            size='large'
-            onClick={() => {
-              resetRegisterStep()
-              reset && reset()
-            }}
-          >
+          <Button variant='outlined' sx={{ mr: '1rem' }} size='large' onClick={() => resetRegisterStep()}>
             Reset
           </Button>
         )}

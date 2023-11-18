@@ -1,9 +1,8 @@
-import { useForm } from 'react-hook-form'
-import { Autocomplete, Grid, TextField } from '@mui/material'
-import { FormTextField } from 'components/_siteWide/formTextField'
-import { StateProps, states } from 'data/dropDowns/states'
+import { Grid } from '@mui/material'
+import { FormTextField } from 'components/_siteWide/form/formTextField'
 import { useRegisterReducer } from 'store/hooks/useRegisterReducer'
 import { Actions } from './actions'
+import { ERRORS } from 'store/slices/registerSlice'
 
 export const Contact = () => {
   const { registerState, setRegisterContact, nextRegisterStep } = useRegisterReducer()
@@ -12,121 +11,97 @@ export const Contact = () => {
 
   const onSubmit = () => nextRegisterStep(contact)
 
-  const {
-    register,
-    reset,
-    formState: { errors },
-  } = useForm()
-
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <Grid container spacing={4}>
         <Grid item xs={2} sm={6} md={12}>
           <FormTextField
-            register={register}
             label='First'
             property='firstName'
             element={contact}
             setElement={setRegisterContact}
-            errors={errors}
+            error={contact.errors.filter((e) => e === ERRORS.firstName)[0]}
             required
           />
         </Grid>
         <Grid item xs={2} sm={6} md={12}>
           <FormTextField
-            register={register}
             label='Last'
             property='lastName'
             element={contact}
             setElement={setRegisterContact}
-            errors={errors}
+            error={contact.errors.filter((e) => e === ERRORS.lastName)[0]}
             required
           />
         </Grid>
         <Grid item xs={2} sm={6} md={12}>
           <FormTextField
-            register={register}
             label='Address Line 1'
             property='address'
             element={contact}
             setElement={setRegisterContact}
-            errors={errors}
+            error={contact.errors.filter((e) => e === ERRORS.address)[0]}
             required
           />
         </Grid>
         <Grid item xs={2} sm={6} md={12}>
-          <FormTextField
-            register={register}
-            label='Address Line 2'
-            property='apt'
-            element={contact}
-            setElement={setRegisterContact}
-            errors={errors}
-          />
+          <FormTextField label='Address Line 2' property='apt' element={contact} setElement={setRegisterContact} />
         </Grid>
       </Grid>
       <Grid container spacing={4} columns={{ xs: 4, sm: 6, md: 12 }} sx={{ mt: 0, mb: 0 }}>
         <Grid item xs={2} sm={4} md={4}>
           <FormTextField
-            register={register}
             label='City'
             property='city'
             element={contact}
             setElement={setRegisterContact}
-            errors={errors}
+            error={contact.errors.filter((e) => e === ERRORS.city)[0]}
             required
           />
         </Grid>
         <Grid item xs={2} sm={4} md={4}>
-          <Autocomplete
-            options={states.map((filteredState: StateProps) => filteredState.label)}
-            value={contact.state}
-            onChange={(_e: any, value: any) => setRegisterContact({ ...contact, state: value })}
-            renderInput={(params) => <TextField {...params} label='Choose a State *' />}
-            fullWidth
-            freeSolo
+          <FormTextField
+            label='State'
+            property='state'
+            element={contact}
+            setElement={setRegisterContact}
+            error={contact.errors.filter((e) => e === ERRORS.state)[0]}
+            required
           />
-          {errors.state && <p>State is required.</p>}
         </Grid>
         <Grid item xs={2} sm={4} md={4}>
           <FormTextField
-            register={register}
             label='Zip'
             property='zip'
             element={contact}
             setElement={setRegisterContact}
-            errors={errors}
+            error={contact.errors.filter((e) => e === ERRORS.zip)[0]}
             required
-            pattern={/(^\d{5}$)|(^\d{5}-\d{4}$)/}
           />
         </Grid>
       </Grid>
       <Grid container spacing={4} sx={{ mt: 0 }}>
         <Grid item xs={2} sm={6} md={12}>
           <FormTextField
-            register={register}
             label='Email'
             property='email'
             element={contact}
             setElement={setRegisterContact}
-            errors={errors}
-            pattern={/^[^\s@]+@[^\s@]+\.[^\s@]+$/}
+            error={contact.errors.filter((e) => e === ERRORS.email)[0]}
           />
         </Grid>
         <Grid item xs={2} sm={6} md={12}>
           <FormTextField
-            register={register}
             label='Phone'
             property='phone'
             element={contact}
             setElement={setRegisterContact}
-            errors={errors}
+            error={contact.errors.filter((e) => e === ERRORS.phone)[0]}
             required
-            pattern={/^\(?([0-9]{3})\)?[-]?([0-9]{3})[-]?([0-9]{4})$/}
           />
         </Grid>
       </Grid>
-      <Actions reset={reset} submit={onSubmit} />
+      <Actions submit={onSubmit} />
     </form>
   )
 }

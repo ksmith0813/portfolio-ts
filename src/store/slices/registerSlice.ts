@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'store/store'
 
-export interface ContactProps {
+export type ContactProps = {
   firstName: string
   lastName: string
   address: string
@@ -14,13 +14,13 @@ export interface ContactProps {
   errors: string[]
 }
 
-export interface MovieProps {
+export type MovieProps = {
   favoriteMovie: string
   favoriteGenres: string[]
   errors: string[]
 }
 
-export interface MusicProps {
+export type MusicProps = {
   favoriteBand: string
   favoriteSong: string
   instruments: string[]
@@ -28,14 +28,14 @@ export interface MusicProps {
   errors: string[]
 }
 
-export interface TravelProps {
+export type TravelProps = {
   favoriteCountries: string[]
   favoriteCity: string
   placesVisited: string[]
   errors: string[]
 }
 
-export interface RegisterProps {
+export type RegisterProps = {
   step: number
   complete: boolean
   contact: ContactProps
@@ -123,8 +123,8 @@ export const registerSlice = createSlice({
     previousStep: (state) => {
       state.step = state.step - 1
     },
-    nextStep: (state: RegisterProps, action: PayloadAction<any>) => {
-      if (validateFormUpdate(state, action.payload)) {
+    nextStep: (state: RegisterProps) => {
+      if (validateFormUpdate(state)) {
         state.step = state.step + 1
       }
     },
@@ -141,46 +141,76 @@ export const registerSelector = (state: RootState) => state.persistedReducer.reg
 
 export default registerSlice.reducer
 
-const validateFormUpdate = (state: any, payload: any) => {
+export const ERRORS: any = {
+  firstName: 'First name is required',
+  lastName: 'Last name is required',
+  address: 'Address is required',
+  city: 'City is required',
+  state: 'State is required',
+  zip: 'Zip is required',
+  email: 'Email is required',
+  phone: 'Phone is required',
+}
+
+const validateFormUpdate = (state: RegisterProps) => {
   let isValid = true
   switch (state.step) {
     case 1:
-      isValid = validateMovieUpdate(payload)
+      isValid = validateMovieUpdate(state.movie)
       break
     case 2:
-      isValid = validateMusicUpdate(payload)
+      isValid = validateMusicUpdate(state.music)
       break
     case 3:
-      isValid = validateTravelUpdate(payload)
+      isValid = validateTravelUpdate(state.travel)
       break
     default:
-      isValid = validateContactUpdate(payload)
+      isValid = validateContactUpdate(state.contact) || false
       break
   }
 
   return isValid
 }
 
-const validateContactUpdate = (payload: ContactProps) => {
-  let copy = { ...payload }
+const validateContactUpdate = (contact: ContactProps) => {
+  contact.errors = []
+
+  handleError(contact, 'firstName')
+  handleError(contact, 'lastName')
+  handleError(contact, 'address')
+  handleError(contact, 'city')
+  handleError(contact, 'state')
+  handleError(contact, 'zip')
+  handleError(contact, 'email')
+  handleError(contact, 'phone')
+
+  // Zip pattern={/(^\d{5}$)|(^\d{5}-\d{4}$)/}
+  // Email pattern={/^[^\s@]+@[^\s@]+\.[^\s@]+$/}
+  // Phone pattern={/^\(?([0-9]{3})\)?[-]?([0-9]{3})[-]?([0-9]{4})$/}
+
+  return !contact.errors.length
+}
+
+const validateMovieUpdate = (state: MovieProps) => {
+  let copy = { ...state }
   copy.errors = []
   return !copy.errors.length
 }
 
-const validateMovieUpdate = (payload: MovieProps) => {
-  let copy = { ...payload }
+const validateMusicUpdate = (state: MusicProps) => {
+  let copy = { ...state }
   copy.errors = []
   return !copy.errors.length
 }
 
-const validateMusicUpdate = (payload: MusicProps) => {
-  let copy = { ...payload }
+const validateTravelUpdate = (state: TravelProps) => {
+  let copy = { ...state }
   copy.errors = []
   return !copy.errors.length
 }
 
-const validateTravelUpdate = (payload: TravelProps) => {
-  let copy = { ...payload }
-  copy.errors = []
-  return !copy.errors.length
+const handleError = (state: any, property: string) => {
+  if (!state[property]) {
+    state.errors.push(ERRORS[property])
+  }
 }

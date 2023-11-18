@@ -59,8 +59,8 @@ export const Home = () => {
           <Typography variant='h5' sx={{ marginBottom: '1rem' }}>
             Welcome to my React portfolio application. My name is Kevin Smith. I am a Lead Software Engineer and Tech
             Lead. This application demostrates my frontend engineering skills using the ReactJS library. The tech stack
-            is Typescript, Redux Toolkit, Redux Forms, Functional Components, Webpack, Material UI, Custom Theming, and
-            Axios for hitting API endpoints. Feel free to explore some of the examples below. I definitely had fun
+            is Typescript, Redux Toolkit, Redux Persist, Functional Components, Webpack, Material UI, Custom Theming,
+            and Recharts for data visualizations. Feel free to explore some of the examples below. I definitely had fun
             coding the pages in this demo application.
           </Typography>
         </StyledGreetingBox>

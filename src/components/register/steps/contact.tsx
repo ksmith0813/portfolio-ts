@@ -1,8 +1,8 @@
 import { Grid } from '@mui/material'
 import { FormTextField } from 'components/_siteWide/form/formTextField'
 import { useRegisterReducer } from 'store/hooks/useRegisterReducer'
-import { Actions } from './actions'
 import { ERRORS } from 'store/slices/registerSlice'
+import { Actions } from './actions'
 
 export const Contact = () => {
   const { registerState, setRegisterContact, nextRegisterStep } = useRegisterReducer()

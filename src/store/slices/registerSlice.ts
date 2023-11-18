@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'store/store'
+import { ERRORS } from 'utils/errors'
 
 export type ContactProps = {
   firstName: string
@@ -140,17 +141,6 @@ export const { setContact, setMovie, setMusic, setTravel, reset, resetAll, previ
 export const registerSelector = (state: RootState) => state.persistedReducer.register
 
 export default registerSlice.reducer
-
-export const ERRORS: any = {
-  firstName: 'First name is required',
-  lastName: 'Last name is required',
-  address: 'Address is required',
-  city: 'City is required',
-  state: 'State is required',
-  zip: 'Zip is required',
-  email: 'Email is required',
-  phone: 'Phone is required',
-}
 
 const validateFormUpdate = (state: RegisterProps) => {
   let isValid = true

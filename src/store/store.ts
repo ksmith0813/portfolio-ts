@@ -2,8 +2,9 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import registerReducer from './slices/registerSlice'
-import { userApi } from './api/userApi'
 import { beerApi } from './api/beerApi'
+import { userApi } from './api/userApi'
+import { weatherApi } from './api/weatherApi'
 
 const persistConfig = {
   key: 'root',
@@ -12,19 +13,16 @@ const persistConfig = {
   whitelist: ['register'],
 }
 
-const reducers = combineReducers({
-  register: registerReducer,
-  [userApi.reducerPath]: userApi.reducer,
-  [beerApi.reducerPath]: beerApi.reducer,
-})
+const reducers = combineReducers({ register: registerReducer })
 
 const persistedReducer = persistReducer(persistConfig, reducers)
 
 export const store = configureStore({
   reducer: {
     persistedReducer,
-    [userApi.reducerPath]: userApi.reducer,
     [beerApi.reducerPath]: beerApi.reducer,
+    [userApi.reducerPath]: userApi.reducer,
+    [weatherApi.reducerPath]: weatherApi.reducer,
   },
   devTools: process.env.NODE_ENV !== 'production',
   middleware: (getDefaultMiddleware) =>
@@ -34,7 +32,8 @@ export const store = configureStore({
       },
     })
       .concat(beerApi.middleware)
-      .concat(userApi.middleware),
+      .concat(userApi.middleware)
+      .concat(weatherApi.middleware),
 })
 
 export type AppDispatch = typeof store.dispatch

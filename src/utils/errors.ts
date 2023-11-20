@@ -1,10 +1,12 @@
+const getRequiredText = (property: string) => `${property} is required`
+
 export const ERRORS: any = {
-  firstName: 'First name is required',
-  lastName: 'Last name is required',
-  address: 'Address is required',
-  city: 'City is required',
-  state: 'State is required',
-  zip: 'Zip is required',
-  email: 'Email is required',
-  phone: 'Phone is required',
+  firstName: getRequiredText('First name'),
+  lastName: getRequiredText('Last name'),
+  address: getRequiredText('Address'),
+  city: getRequiredText('City)'),
+  state: getRequiredText('State'),
+  zip: getRequiredText('Zip'),
+  email: getRequiredText('Email'),
+  phone: getRequiredText('Phone'),
 }

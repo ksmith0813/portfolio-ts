@@ -1,5 +1,13 @@
 import { useEffect, useState } from 'react'
 import { TextField, Typography } from '@mui/material'
+import newMoon from 'assets/moon-new.svg'
+import waxingCrescent from 'assets/moon-waxing-crescent.svg'
+import firstQuarter from 'assets/moon-first-quarter.svg'
+import waxingGibbous from 'assets/moon-waxing-gibbous.svg'
+import fullMoon from 'assets/moon-full.svg'
+import waningGibbous from 'assets/moon-waning-gibbous.svg'
+import lastQuarter from 'assets/moon/moon-last-quarter.svg'
+import waningCrescent from 'assets/moon-waning-crescent.svg'
 import { PageHeader } from 'components/_siteWide/pageHeader'
 import { useGetWeatherQuery } from 'store/api/weatherApi'
 

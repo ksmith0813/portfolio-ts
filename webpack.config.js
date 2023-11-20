@@ -30,6 +30,14 @@ module.exports = {
         test: /\.s[ac]ss$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'svg-url-loader',
+          },
+        ],
+      },
     ],
   },
   devtool: prod ? undefined : 'source-map',

@@ -14,6 +14,15 @@ import { useGetWeatherQuery } from 'store/api/weatherApi'
 import { DataItem } from 'components/_siteWide/dataItem'
 import { formatDate } from 'utils/date'
 
+const StyledLocationGrid = styled(Grid)({
+  paddingTop: '2rem',
+  fontSize: '1.25rem',
+})
+
+const StyledLocationLinearProgress = styled(LinearProgress)({
+  height: '10px',
+})
+
 const StyledHourlyWeather = styled('div')(({ theme }) => ({
   display: 'inline-flex',
   flexFlow: 'nowrap',
@@ -152,36 +161,40 @@ const CurrentWeather = ({ location, current, type }: any) => (
 
 const LocationTime = ({ location, current }: any) => (
   <>
-    <Grid container style={{ paddingTop: '2rem' }}>
+    <StyledLocationGrid container>
       <Grid item xs={4}>
         <DataItem label='Local Time' children={formatDate(location.localtime, true)} />
       </Grid>
       <Grid item xs={4}>
         <DataItem label='Timezone' children={location.tz_id} />
       </Grid>
-    </Grid>
-    <Grid container style={{ paddingTop: '2rem' }}>
+    </StyledLocationGrid>
+    <StyledLocationGrid container>
       <Grid item xs={4}>
         <DataItem label='Latitude' children={location.lat} />
       </Grid>
       <Grid item xs={4}>
         <DataItem label='Longitude' children={location.lon} />
       </Grid>
-    </Grid>
-    <Grid container style={{ paddingTop: '2rem' }}>
+    </StyledLocationGrid>
+    <StyledLocationGrid container>
       <Grid item xs={4}>
         <DataItem
           label='Cloud Cover'
-          children={<LinearProgress variant='determinate' value={current.cloud} style={{ width: '50%' }} />}
+          children={
+            <StyledLocationLinearProgress variant='determinate' value={current.cloud} style={{ width: '75%' }} />
+          }
         />
       </Grid>
       <Grid item xs={4}>
         <DataItem
           label='Humidity'
-          children={<LinearProgress variant='determinate' value={current.humidity} style={{ width: '50%' }} />}
+          children={
+            <StyledLocationLinearProgress variant='determinate' value={current.humidity} style={{ width: '75%' }} />
+          }
         />
       </Grid>
-    </Grid>
+    </StyledLocationGrid>
   </>
 )
 

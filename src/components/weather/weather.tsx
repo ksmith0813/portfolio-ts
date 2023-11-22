@@ -14,6 +14,13 @@ import { useGetWeatherQuery } from 'store/api/weatherApi'
 import { DataItem } from 'components/_siteWide/dataItem'
 import { formatDate } from 'utils/date'
 
+const StyledTempAvatar = styled(Avatar)(({ theme }) => ({
+  height: '200px',
+  width: '200px',
+  fontSize: '3rem',
+  background: theme.linearGradientAngle,
+}))
+
 const StyledLocationGrid = styled(Grid)({
   paddingTop: '2rem',
   fontSize: '1.25rem',
@@ -21,6 +28,7 @@ const StyledLocationGrid = styled(Grid)({
 
 const StyledLocationLinearProgress = styled(LinearProgress)({
   height: '10px',
+  width: '75%',
 })
 
 const StyledHourlyWeather = styled('div')(({ theme }) => ({
@@ -115,13 +123,6 @@ const HeaderRow = ({ location, type, setType }: any) => (
   </Grid>
 )
 
-const StyledTempAvatar = styled(Avatar)(({ theme }) => ({
-  height: '200px',
-  width: '200px',
-  fontSize: '3rem',
-  background: theme.linearGradientAngle,
-}))
-
 const CurrentWeather = ({ location, current, type }: any) => (
   <Box sx={{ flexGrow: 1 }}>
     <Grid container spacing={2}>
@@ -181,17 +182,13 @@ const LocationTime = ({ location, current }: any) => (
       <Grid item xs={4}>
         <DataItem
           label='Cloud Cover'
-          children={
-            <StyledLocationLinearProgress variant='determinate' value={current.cloud} style={{ width: '75%' }} />
-          }
+          children={<StyledLocationLinearProgress variant='determinate' value={current.cloud} />}
         />
       </Grid>
       <Grid item xs={4}>
         <DataItem
           label='Humidity'
-          children={
-            <StyledLocationLinearProgress variant='determinate' value={current.humidity} style={{ width: '75%' }} />
-          }
+          children={<StyledLocationLinearProgress variant='determinate' value={current.humidity} />}
         />
       </Grid>
     </StyledLocationGrid>

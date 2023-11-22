@@ -1,16 +1,5 @@
 import { useEffect, useState } from 'react'
-import {
-  Avatar,
-  Box,
-  Chip,
-  CircularProgress,
-  Grid,
-  LinearProgress,
-  styled,
-  Switch,
-  TextField,
-  Typography,
-} from '@mui/material'
+import { Avatar, Box, Chip, CircularProgress, Grid, LinearProgress, styled, Switch, TextField } from '@mui/material'
 import newMoon from 'assets/moon-new.svg'
 import waxingCrescent from 'assets/moon-waxing-crescent.svg'
 import firstQuarter from 'assets/moon-first-quarter.svg'
@@ -19,7 +8,7 @@ import fullMoon from 'assets/moon-full.svg'
 import waningGibbous from 'assets/moon-waning-gibbous.svg'
 import lastQuarter from 'assets/moon-last-quarter.svg'
 import waningCrescent from 'assets/moon-waning-crescent.svg'
-import { NoDataContent } from 'components/_siteWide/NoData'
+import { NoDataContent } from 'components/_siteWide/noData'
 import { PageHeader } from 'components/_siteWide/pageHeader'
 import { useGetWeatherQuery } from 'store/api/weatherApi'
 import { DataItem } from 'components/_siteWide/dataItem'

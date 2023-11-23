@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { styled } from '@mui/material/styles'
 import { Box, Grid, Typography } from '@mui/material'
 import { PageLink, pageLinks } from 'components/_siteWide/pageLink'
+import { CenteredContent } from 'components/_siteWide/centeredContent'
 
 const StyledContainerBox = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -22,10 +23,6 @@ const StyledGreetingBox = styled(Box)({
 
 const StyledLinkBox = styled(Box)(({ theme }) => ({
   ...theme.typography.h6,
-  display: 'flex',
-  justifyContent: 'center',
-  flexDirection: 'column',
-  alignItems: 'center',
   backgroundColor: theme.gray3,
   color: theme.gray7,
   padding: theme.spacing(4),
@@ -72,8 +69,10 @@ export const Home = () => {
           return (
             <Grid item xs={2} sm={4} md={4} key={index}>
               <StyledLinkBox onClick={() => onItemClick(route)}>
-                <Typography variant='h6'>{route}</Typography>
-                {pageLink.icon}
+                <CenteredContent height={200}>
+                  <Typography variant='h6'>{route}</Typography>
+                  {pageLink.icon}
+                </CenteredContent>
               </StyledLinkBox>
             </Grid>
           )

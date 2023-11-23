@@ -13,6 +13,7 @@ import { PageHeader } from 'components/_siteWide/pageHeader'
 import { useGetWeatherQuery } from 'store/api/weatherApi'
 import { DataItem } from 'components/_siteWide/dataItem'
 import { formatDate } from 'utils/date'
+import { CenteredContent } from 'components/_siteWide/centeredContent'
 
 const StyledTempAvatar = styled(Avatar)(({ theme }) => ({
   height: '200px',
@@ -55,17 +56,30 @@ const StyledMoonIcon = styled('img')({
 })
 
 export const Weather = () => {
-  const [search, setSearch] = useState<string>('Fayetteville, AR')
+  const [search, setSearch] = useState<string>('')
   const [weather, setWeather] = useState(null)
   const [loading, setLoading] = useState<boolean>(false)
 
-  const { data } = useGetWeatherQuery({ search: 'Fayetteville, AR', key: process.env.REACT_APP_WEATHER_API })
+  const { data } = useGetWeatherQuery({ search: search, key: process.env.REACT_APP_WEATHER_API })
 
   useEffect(() => {
-    if (data) {
-      setWeather(data)
-    }
-  }, [data])
+    const timeoutId = setTimeout(() => {
+      if (search) {
+        setLoading(true)
+        if (data?.location) {
+          setWeather(data)
+          setLoading(false)
+        } else {
+          setWeather(null)
+          setLoading(false)
+        }
+      } else {
+        setWeather(null)
+        setLoading(false)
+      }
+    }, 1000)
+    return () => clearTimeout(timeoutId)
+  }, [search, data])
 
   const onChange = (e: any) => setSearch(e.target.value || '')
 
@@ -79,7 +93,11 @@ export const Weather = () => {
         style={{ width: '600px' }}
       />
       <Box>
-        {loading && <CircularProgress />}
+        {loading && (
+          <CenteredContent>
+            <CircularProgress />
+          </CenteredContent>
+        )}
         {!loading && !weather && <NoDataContent />}
         {!loading && weather && <WeatherContent weather={weather} />}
       </Box>

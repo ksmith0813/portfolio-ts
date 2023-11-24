@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import registerReducer from './slices/registerSlice'
+import weatherReducer from './slices/weatherSlice'
 import { beerApi } from './api/beerApi'
 import { userApi } from './api/userApi'
 import { weatherApi } from './api/weatherApi'
@@ -10,10 +11,10 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  whitelist: ['register'],
+  whitelist: ['register', 'weather'],
 }
 
-const reducers = combineReducers({ register: registerReducer })
+const reducers = combineReducers({ register: registerReducer, weather: weatherReducer })
 
 const persistedReducer = persistReducer(persistConfig, reducers)
 

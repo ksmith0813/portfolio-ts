@@ -14,6 +14,7 @@ import { useGetWeatherQuery } from 'store/api/weatherApi'
 import { DataItem } from 'components/_siteWide/dataItem'
 import { formatDate } from 'utils/date'
 import { CenteredContent } from 'components/_siteWide/centeredContent'
+import { useWeatherReducer } from 'store/hooks/useWeatherReducer'
 
 const StyledTempAvatar = styled(Avatar)(({ theme }) => ({
   height: '200px',
@@ -56,32 +57,32 @@ const StyledMoonIcon = styled('img')({
 })
 
 export const Weather = () => {
-  const [search, setSearch] = useState<string>('')
-  const [weather, setWeather] = useState(null)
-  const [loading, setLoading] = useState<boolean>(false)
-
+  const { weatherState, setWeatherSearch, setWeatherLoading, setWeatherData } = useWeatherReducer()
+  const search = weatherState.search
+  const loading = weatherState.loading
+  const weather = weatherState.weather
   const { data } = useGetWeatherQuery({ search: search, key: process.env.REACT_APP_WEATHER_API })
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       if (search) {
-        setLoading(true)
+        setWeatherLoading(true)
         if (data?.location) {
-          setWeather(data)
-          setLoading(false)
+          setWeatherData(data)
+          setWeatherLoading(false)
         } else {
-          setWeather(null)
-          setLoading(false)
+          setWeatherData(null)
+          setWeatherLoading(false)
         }
       } else {
-        setWeather(null)
-        setLoading(false)
+        setWeatherData(null)
+        setWeatherLoading(false)
       }
     }, 1000)
     return () => clearTimeout(timeoutId)
   }, [search, data])
 
-  const onChange = (e: any) => setSearch(e.target.value || '')
+  const onChange = (e: any) => setWeatherSearch(e.target.value || '')
 
   return (
     <>

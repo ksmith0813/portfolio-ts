@@ -33,6 +33,14 @@ const StyledLocationLinearProgress = styled(LinearProgress)({
   width: '75%',
 })
 
+const StyledWeatherBox = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.gray2,
+  color: theme.gray7,
+  paddingBottom: '1rem',
+  fontSize: '1.5rem',
+  textAlign: 'center',
+}))
+
 const StyledHourlyWeather = styled('div')(({ theme }) => ({
   display: 'inline-flex',
   flexFlow: 'nowrap',
@@ -116,8 +124,10 @@ const WeatherContent = ({ weather }: any) => {
   return (
     <div className='weather-detail'>
       <HeaderRow location={location} type={type} setType={setType} />
-      <CurrentWeather location={location} current={current} type={type} />
-      <Astro astro={forecastDay.astro} />
+      <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <CurrentWeather location={location} current={current} type={type} />
+        <Astro astro={forecastDay.astro} />
+      </Box>
       {forecastHourly && <HourlyWeather forecastHourly={forecastHourly} type={type} />}
     </div>
   )
@@ -143,7 +153,7 @@ const HeaderRow = ({ location, type, setType }: any) => (
 )
 
 const CurrentWeather = ({ location, current, type }: any) => (
-  <Box sx={{ flexGrow: 1 }}>
+  <>
     <Grid container spacing={2}>
       <Grid item xs={4}>
         <Box
@@ -161,22 +171,29 @@ const CurrentWeather = ({ location, current, type }: any) => (
       <Grid item xs={8}>
         <LocationTime location={location} current={current} />
       </Grid>
-      <Grid item xs={8}>
-        <Box style={{ paddingTop: '1rem' }}>
-          <DataItem label='Condition' children={current.condition.text} />
-          <img src={current.condition.icon} alt='' />
-        </Box>
+      <Grid item xs={2}>
+        <StyledWeatherBox style={{ paddingTop: '1rem' }}>
+          <CenteredContent height={150}>
+            <DataItem label='Condition' children={current.condition.text} />
+          </CenteredContent>
+        </StyledWeatherBox>
+      </Grid>
+      <Grid item xs={2}>
+        <StyledWeatherBox style={{ paddingTop: '1rem' }}>
+          <CenteredContent height={150}>
+            <DataItem label='Wind' children={`${current.wind_mph} MPH`} />
+          </CenteredContent>
+        </StyledWeatherBox>
+      </Grid>
+      <Grid item xs={2}>
+        <StyledWeatherBox style={{ paddingTop: '1rem' }}>
+          <CenteredContent height={150}>
+            <DataItem label='Wind Direction' children={<Chip label={current.wind_dir} />} />
+          </CenteredContent>
+        </StyledWeatherBox>
       </Grid>
     </Grid>
-    <Grid className='pt-100'>
-      <Grid item xs={12}>
-        <DataItem label='Wind' children={`${current.wind_mph} MPH`} />
-      </Grid>
-      <Grid item xs={12}>
-        <DataItem label='Wind Direction' children={<Chip label={current.wind_dir} />} />
-      </Grid>
-    </Grid>
-  </Box>
+  </>
 )
 
 const LocationTime = ({ location, current }: any) => (
@@ -216,20 +233,27 @@ const LocationTime = ({ location, current }: any) => (
 
 const Astro = ({ astro }: any) => (
   <>
-    <Grid container>
-      <Grid item xs={12}>
-        <DataItem label='Sunrise' children={astro.sunrise} />
+    <Grid container spacing={2} sx={{ marginTop: '1rem' }}>
+      <Grid item xs={2}>
+        <StyledWeatherBox style={{ paddingTop: '1rem' }}>
+          <CenteredContent height={150}>
+            <DataItem label='Sunrise' children={astro.sunrise} />
+          </CenteredContent>
+        </StyledWeatherBox>
       </Grid>
-      <Grid item xs={12}>
-        <DataItem label='Sunset' children={astro.sunset} />
+      <Grid item xs={2}>
+        <StyledWeatherBox style={{ paddingTop: '1rem' }}>
+          <CenteredContent height={150}>
+            <DataItem label='Sunset' children={astro.sunset} />
+          </CenteredContent>
+        </StyledWeatherBox>
       </Grid>
-    </Grid>
-    <Grid container style={{ paddingTop: '2rem' }}>
-      <Grid item xs={12}>
-        <DataItem label='Moon Phase' children={astro.moon_phase} />
-      </Grid>
-      <Grid item xs={12}>
-        <MoonPhaseImg phase={astro.moon_phase} />
+      <Grid item xs={2}>
+        <StyledWeatherBox style={{ paddingTop: '1rem' }}>
+          <CenteredContent height={150}>
+            <DataItem label='Moon Phase' children={<MoonPhaseImg phase={astro.moon_phase} />} />
+          </CenteredContent>
+        </StyledWeatherBox>
       </Grid>
     </Grid>
   </>
@@ -238,7 +262,7 @@ const Astro = ({ astro }: any) => (
 const HourlyWeather = ({ forecastHourly, type }: any) => (
   <>
     <Grid style={{ paddingTop: '3rem', paddingBottom: '1rem,', fontSize: '1.5rem' }}>
-      Hourly Weather for {formatDate()}
+      Hourly Weather for <b>{formatDate()}</b>
     </Grid>
     <StyledHourlyWeather>
       {forecastHourly.map((f: any) => (

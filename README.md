@@ -1,4 +1,4 @@
-# Portfolio Typescript App - WIP
+# Portfolio Typescript App
 
 ## Installation and Setup Instructions
 

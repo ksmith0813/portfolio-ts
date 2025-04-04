@@ -5,7 +5,6 @@ import { Home } from 'components/home/home'
 import { Dashboard } from 'components/dashboard/dashboard'
 import { Register } from 'components/register/register'
 import { Table } from 'components/table/table'
-import { List } from 'components/list/list'
 import { Weather } from 'components/weather/weather'
 import { Visuals } from 'components/visuals/visuals'
 import { Dogs } from 'components/dogs/dogs'
@@ -18,7 +17,6 @@ export const Router = () => (
         <Route index path='dashboard' element={<Dashboard />} />
         <Route index path='register' element={<Register />} />
         <Route index path='table' element={<Table />} />
-        <Route index path='list' element={<List />} />
         <Route index path='weather' element={<Weather />} />
         <Route index path='visuals' element={<Visuals />} />
         <Route index path='dogs' element={<Dogs />} />

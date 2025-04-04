@@ -16,6 +16,13 @@ import { formatDate } from 'utils/date'
 import { CenteredContent } from 'components/_siteWide/centeredContent'
 import { useWeatherReducer } from 'store/hooks/useWeatherReducer'
 
+const StyledHeaderRow = styled(Grid)({
+  paddingTop: '2rem',
+  fontSize: '1.5rem',
+  display: 'flex',
+  justifyContent: 'space-between',
+})
+
 const StyledTempAvatar = styled(Avatar)(({ theme }) => ({
   height: '200px',
   width: '200px',
@@ -36,8 +43,8 @@ const StyledLocationLinearProgress = styled(LinearProgress)({
 const StyledWeatherBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.gray2,
   color: theme.gray7,
-  paddingBottom: '1rem',
-  fontSize: '1.5rem',
+  padding: '1rem',
+  fontSize: '1.25rem',
   textAlign: 'center',
 }))
 
@@ -125,8 +132,7 @@ const WeatherContent = ({ weather }: any) => {
     <div className='weather-detail'>
       <HeaderRow location={location} type={type} setType={setType} />
       <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-        <CurrentWeather location={location} current={current} type={type} />
-        <Astro astro={forecastDay.astro} />
+        <CurrentWeather location={location} current={current} astro={forecastDay.astro} type={type} />
       </Box>
       {forecastHourly && <HourlyWeather forecastHourly={forecastHourly} type={type} />}
     </div>
@@ -134,7 +140,7 @@ const WeatherContent = ({ weather }: any) => {
 }
 
 const HeaderRow = ({ location, type, setType }: any) => (
-  <Grid container style={{ paddingTop: '2rem', fontSize: '2rem' }}>
+  <StyledHeaderRow>
     <Grid item>
       <b>
         {location.name}, {location.region}
@@ -149,10 +155,10 @@ const HeaderRow = ({ location, type, setType }: any) => (
         }}
       />
     </Grid>
-  </Grid>
+  </StyledHeaderRow>
 )
 
-const CurrentWeather = ({ location, current, type }: any) => (
+const CurrentWeather = ({ location, current, type, astro }: any) => (
   <>
     <Grid container spacing={2}>
       <Grid item xs={4}>
@@ -192,6 +198,27 @@ const CurrentWeather = ({ location, current, type }: any) => (
           </CenteredContent>
         </StyledWeatherBox>
       </Grid>
+      <Grid item xs={2}>
+        <StyledWeatherBox style={{ paddingTop: '1rem' }}>
+          <CenteredContent height={150}>
+            <DataItem label='Sunrise' children={astro.sunrise} />
+          </CenteredContent>
+        </StyledWeatherBox>
+      </Grid>
+      <Grid item xs={2}>
+        <StyledWeatherBox style={{ paddingTop: '1rem' }}>
+          <CenteredContent height={150}>
+            <DataItem label='Sunset' children={astro.sunset} />
+          </CenteredContent>
+        </StyledWeatherBox>
+      </Grid>
+      <Grid item xs={2}>
+        <StyledWeatherBox style={{ paddingTop: '1rem' }}>
+          <CenteredContent height={150}>
+            <DataItem label='Moon Phase' children={<MoonPhaseImg phase={astro.moon_phase} />} />
+          </CenteredContent>
+        </StyledWeatherBox>
+      </Grid>
     </Grid>
   </>
 )
@@ -228,34 +255,6 @@ const LocationTime = ({ location, current }: any) => (
         />
       </Grid>
     </StyledLocationGrid>
-  </>
-)
-
-const Astro = ({ astro }: any) => (
-  <>
-    <Grid container spacing={2} sx={{ marginTop: '1rem' }}>
-      <Grid item xs={2}>
-        <StyledWeatherBox style={{ paddingTop: '1rem' }}>
-          <CenteredContent height={150}>
-            <DataItem label='Sunrise' children={astro.sunrise} />
-          </CenteredContent>
-        </StyledWeatherBox>
-      </Grid>
-      <Grid item xs={2}>
-        <StyledWeatherBox style={{ paddingTop: '1rem' }}>
-          <CenteredContent height={150}>
-            <DataItem label='Sunset' children={astro.sunset} />
-          </CenteredContent>
-        </StyledWeatherBox>
-      </Grid>
-      <Grid item xs={2}>
-        <StyledWeatherBox style={{ paddingTop: '1rem' }}>
-          <CenteredContent height={150}>
-            <DataItem label='Moon Phase' children={<MoonPhaseImg phase={astro.moon_phase} />} />
-          </CenteredContent>
-        </StyledWeatherBox>
-      </Grid>
-    </Grid>
   </>
 )
 

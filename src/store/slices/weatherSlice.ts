@@ -1,7 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'store/store'
 
-const initialState = {
+type WeatherProps = {
+  search: string
+  weather: object | null
+  loading: boolean
+}
+const initialState: WeatherProps = {
   search: '',
   weather: null,
   loading: false,

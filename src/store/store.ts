@@ -6,6 +6,7 @@ import weatherReducer from './slices/weatherSlice'
 import { beerApi } from './api/beerApi'
 import { userApi } from './api/userApi'
 import { weatherApi } from './api/weatherApi'
+import { dogApi } from './api/dogApi'
 
 const persistConfig = {
   key: 'root',
@@ -24,6 +25,7 @@ export const store = configureStore({
     [beerApi.reducerPath]: beerApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [weatherApi.reducerPath]: weatherApi.reducer,
+    [dogApi.reducerPath]: dogApi.reducer,
   },
   devTools: process.env.NODE_ENV !== 'production',
   middleware: (getDefaultMiddleware) =>
@@ -34,7 +36,8 @@ export const store = configureStore({
     })
       .concat(beerApi.middleware)
       .concat(userApi.middleware)
-      .concat(weatherApi.middleware),
+      .concat(weatherApi.middleware)
+      .concat(dogApi.middleware),
 })
 
 export type AppDispatch = typeof store.dispatch

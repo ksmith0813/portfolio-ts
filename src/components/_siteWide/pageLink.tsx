@@ -6,6 +6,7 @@ import TableViewIcon from '@mui/icons-material/TableView'
 import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined'
 import WbSunnyIcon from '@mui/icons-material/WbSunny'
 import BarChartIcon from '@mui/icons-material/BarChart'
+import { Pets } from '@mui/icons-material'
 
 export type PageLink = {
   route: string
@@ -20,4 +21,5 @@ export const pageLinks: PageLink[] = [
   { route: '/list', icon: <FormatListBulletedOutlinedIcon /> },
   { route: '/weather', icon: <WbSunnyIcon /> },
   { route: '/visuals', icon: <BarChartIcon /> },
+  { route: '/dogs', icon: <Pets /> },
 ]

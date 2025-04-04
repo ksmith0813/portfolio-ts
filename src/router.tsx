@@ -8,6 +8,7 @@ import { Table } from 'components/table/table'
 import { List } from 'components/list/list'
 import { Weather } from 'components/weather/weather'
 import { Visuals } from 'components/visuals/visuals'
+import { Dogs } from 'components/dogs/dogs'
 
 export const Router = () => (
   <BrowserRouter>
@@ -20,6 +21,7 @@ export const Router = () => (
         <Route index path='list' element={<List />} />
         <Route index path='weather' element={<Weather />} />
         <Route index path='visuals' element={<Visuals />} />
+        <Route index path='dogs' element={<Dogs />} />
         <Route path='*' element={<Typography variant='h6'>Page Not Found</Typography>} />
       </Route>
     </Routes>

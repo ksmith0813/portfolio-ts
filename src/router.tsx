@@ -16,7 +16,7 @@ export const Router = () => (
         <Route index path='home' element={<Home />} />
         <Route index path='dashboard' element={<Dashboard />} />
         <Route index path='register' element={<Register />} />
-        <Route index path='table' element={<Table />} />
+        <Route index path='table' element={<Table height='calc(100vh - 175px)' showHeader />} />
         <Route index path='weather' element={<Weather />} />
         <Route index path='visuals' element={<Visuals />} />
         <Route index path='dogs' element={<Dogs />} />

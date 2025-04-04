@@ -17,7 +17,7 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   },
 }))
 
-export const Table = () => {
+export const Table = ({ height, showHeader }: any) => {
   const { data } = useGetUsersQuery()
 
   const [userData, setUserData] = useState([])
@@ -25,27 +25,29 @@ export const Table = () => {
   useEffect(() => data && setUserData(data.results || []), [data])
 
   return (
-    <Box sx={{ height: 'calc(100vh - 175px)' }}>
-      <PageHeader title='Table' />
-      <StyledDataGrid
-        loading={!userData || userData?.length === 0}
-        rows={userData}
-        columns={userColumns}
-        getRowId={(row: any) => row.id + row.name.first}
-        columnVisibilityModel={{
-          id: false,
-        }}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 20,
+    <>
+      {showHeader && <PageHeader title='Table' />}
+      <Box style={{ height }}>
+        <StyledDataGrid
+          loading={!userData || userData?.length === 0}
+          rows={userData}
+          columns={userColumns}
+          getRowId={(row: any) => row.id + row.name.first}
+          columnVisibilityModel={{
+            id: false,
+          }}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 50,
+              },
             },
-          },
-        }}
-        pageSizeOptions={[20]}
-        checkboxSelection
-        disableRowSelectionOnClick
-      />
-    </Box>
+          }}
+          pageSizeOptions={[20]}
+          checkboxSelection
+          disableRowSelectionOnClick
+        />
+      </Box>
+    </>
   )
 }

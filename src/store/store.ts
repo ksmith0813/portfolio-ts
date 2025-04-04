@@ -3,7 +3,6 @@ import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } fro
 import storage from 'redux-persist/lib/storage'
 import registerReducer from './slices/registerSlice'
 import weatherReducer from './slices/weatherSlice'
-import { beerApi } from './api/beerApi'
 import { userApi } from './api/userApi'
 import { weatherApi } from './api/weatherApi'
 import { dogApi } from './api/dogApi'
@@ -22,7 +21,6 @@ const persistedReducer = persistReducer(persistConfig, reducers)
 export const store = configureStore({
   reducer: {
     persistedReducer,
-    [beerApi.reducerPath]: beerApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [weatherApi.reducerPath]: weatherApi.reducer,
     [dogApi.reducerPath]: dogApi.reducer,
@@ -34,7 +32,6 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     })
-      .concat(beerApi.middleware)
       .concat(userApi.middleware)
       .concat(weatherApi.middleware)
       .concat(dogApi.middleware),

@@ -58,16 +58,14 @@ Page Examples:
 
 - Home page with an introduction about me and tile links to some of the pages.
 
-- Dashboard - TODO.
+- Dashboard with various wigets
 
-- Form Registration with multiple steps - TODO.
+- Form Registration with multiple steps
 
-- Grid view with filtering, sorting, custom column hiding - TODO.
+- Grid view example
 
-- List view with an editable todo list - TODO.
+- Weather page
 
-- Weather page - TODO.
+- Data visualizations
 
-- Data visualizations - TODO.
-
-- Theming menu option to change the theme color throughout the application - TODO.
+- Random Dog Picture fetching
